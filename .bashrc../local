@@ -52,7 +52,7 @@ sourceif ~/.bashrc../git-prompt
 
 export PERL_CPANM_OPT='--sudo'
 
-source `which devel-local.sh`
+[[ -n `which devel-local.sh` ]] && source `which devel-local.sh`
 
 alias s=stackato
 
