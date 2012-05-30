@@ -1,0 +1,37 @@
+#!/bin/bash
+
+:::() {
+    cd ~/src
+    case $1 in
+        "hpc")
+            cd hpcloud
+            export PATH=`pwd`/.bin:$PATH
+            vim hpnova
+            ;;
+        "cdb")
+            cd cogdb-pm
+            ;;
+        "tml")
+            cd testml-pm
+            grep '^# sub' lib/TestML/Library/Standard.pm | awk '{print $3}' | sort | fmt &&
+                echo -e "\e[31m↑ TODO\e[0m"
+            grep '^sub' lib/TestML/Library/Standard.pm | awk '{print $2}' | sort | fmt
+            ;;
+        "prb")
+            cd pegex-rb
+            if [[ $# == 2 ]]; then
+                tmux split-window
+                tmux resize-pane -D 10
+                # TODO bundle exec guard
+                #   tmux select-pane -t ':.+'
+            fi
+            vim -o spec/parser_spec.rb lib/pegex/parser.rb
+            ;;
+        "sr")
+            cd ~/src/stackato-stackrad-pm &&
+            devel-local . &&
+            vim lib/Stackato/Stackrad.pm
+            ;;
+        *) echo "Don't know that one."
+    esac
+}
