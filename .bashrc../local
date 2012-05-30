@@ -1,44 +1,14 @@
 #!/bin/bash
 
-path-prepend /opt/rubies/1.9.3-p125/bin
-export GEM_HOME=~/gems
-path-prepend $GEM_HOME/bin
-
-export PS1='PairUp!™ \w\$ '
-
-alias links=elinks
+for n in ~/.sh/*; do
+    source $n || echo "Trouble sourcing: $n"
+done
 source ~/.,
 
-+++() {
-    vim $HOME/.bashrc../local
-    exec bash
-}
+export PS1='PairUp!™ \w\$ '
+sourceif ~/.bashrc../git-prompt
 
-:::() {
-    cd ~/src
-    case $1 in
-        "cdb")
-            cd cogdb-pm
-            ;;
-        "tml")
-            cd testml-pm
-            grep '^# sub' lib/TestML/Library/Standard.pm | awk '{print $3}' | sort | fmt &&
-                echo -e "\e[31m↑ TODO\e[0m"
-            grep '^sub' lib/TestML/Library/Standard.pm | awk '{print $2}' | sort | fmt
-            ;;
-        "prb")
-            cd pegex-rb
-            if [[ $# == 2 ]]; then
-                tmux split-window
-                tmux resize-pane -D 10
-                # TODO bundle exec guard
-                #   tmux select-pane -t ':.+'
-            fi
-            vim -o spec/parser_spec.rb lib/pegex/parser.rb
-            ;;
-        *) echo "Don't know that one."
-    esac
-}
+alias links=elinks
 
 export VISUAL=vim
 export EDITOR=$VISUAL
@@ -48,44 +18,3 @@ export GIT_AUTHOR_EMAIL=ingy@ingy.net
 export GIT_AUTHOR_NAME="Ingy döt Net"
 export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
 export GIT_COMMITTER_AUTHOR=$GIT_AUTHOR_AUTHOR
-
-sourceif ~/.bashrc../linux
-sourceif ~/.bashrc../git-prompt
-
-export PERL_CPANM_OPT='--sudo'
-
-[[ -n `which devel-local.sh` ]] && source `which devel-local.sh`
-
-alias s=stackato
-
-narc() {
-  local x=`"$@"`
-  [ $? -ne 0 ] && printf "%s" $x
-}
-
-export COGS=~/src/rkingy-cog
-export CARDS="index/name/Cards"
-card() {
-    (
-        cd $COGS
-        if [[ 0 == $# ]]; then
-            vim $CARDS
-        else
-            echo "- $@" >> $CARDS
-            tail -20 $CARDS
-        fi &&
-        git add $(dirname $CARDS)/$(readlink $CARDS) && gcim …
-        echo "Testing 'narc'"
-        [[ 0 == $? ]] && narc git push 2>&1
-    )
-}
-
-sr() {
-    cd ~/src/stackato-stackrad-pm &&
-    devel-local . &&
-    vim lib/Stackato/Stackrad.pm
-}
-
-cd-pm() {
-    cd $(dirname $(perldoc -l $1))
-}
