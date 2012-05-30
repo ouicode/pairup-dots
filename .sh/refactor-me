@@ -14,7 +14,7 @@ cd-pm() {
 # [[ -n `which devel-local.sh` ]] && source `which devel-local.sh`
 
 # Maybe plusplusplus-dots ?:
-+++() {
-    vim $HOME/.bashrc../local
-    exec bash
+function +++ {
+    vim $HOME/.${SHELL##*/}rc
+    exec $SHELL
 }
