@@ -1,0 +1,17 @@
+export COGS=~/src/rkingy-cog
+export CARDS="index/name/Cards"
+card() {
+    (
+        cd $COGS
+        if [[ 0 == $# ]]; then
+            vim $CARDS
+        else
+            echo "- $@" >> $CARDS
+            tail -20 $CARDS
+        fi &&
+        git add $(dirname $CARDS)/$(readlink $CARDS) && gcim …
+        echo "Testing 'narc'"
+        [[ 0 == $? ]] && narc git push 2>&1
+    )
+}
+
