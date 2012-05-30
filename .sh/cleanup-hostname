@@ -1,0 +1,3 @@
+PAIRUP_HOST=`echo $VCAP_APPLICATION | sed 's/.*"name":"//; s/".*//'`
+HOST=$PAIRUP_HOST
+# vim:ft=sh
