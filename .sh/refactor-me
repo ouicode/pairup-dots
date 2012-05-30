@@ -1,0 +1,20 @@
+# If this works well, it should be upstreamed, maybe sane-dots?:
+narc() {
+  local x=`"$@"`
+  [ $? -ne 0 ] && printf "%s" $x
+}
+
+# This should be in linux-dots:
+source ~/.bashrc../linux
+
+# Should be perl-dots
+cd-pm() {
+    cd $(dirname $(perldoc -l $1))
+}
+# [[ -n `which devel-local.sh` ]] && source `which devel-local.sh`
+
+# Maybe plusplusplus-dots ?:
++++() {
+    vim $HOME/.bashrc../local
+    exec bash
+}
