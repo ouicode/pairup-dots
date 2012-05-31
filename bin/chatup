@@ -1,0 +1,6 @@
+#!/bin/bash -xe
+source ~/.sh/cleanup-hostname
+[ -n $PAIRUP_HOST ]
+IRC_SERVER=${CHATUP_SERVER:-irc.freenode.org}
+CHANNELS=${CHATUP_CHANNELS:-#stackato}
+weechat-curses irc://$PAIRUP_HOST@$IRC_SERVER//$CHANNELS
