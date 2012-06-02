@@ -1,12 +1,6 @@
 #!/bin/bash
 
-for n in ~/.sh/*; do
-    source $n || echo "Trouble sourcing: $n"
-done
-source ~/.,
-
 export PS1='PairUp!™ \w\$ '
-sourceif ~/.bashrc../git-prompt
 
 alias links=elinks
 
