@@ -1,11 +1,9 @@
 alias s=stackato
 
+source ~/.../lib/path-manip
 # TODO: rvm this.
-path-prepend /opt/rubies/1.9.3-p125/bin
+...path-prepend /opt/rubies/1.9.3-p125/bin
 export GEM_HOME=~/gems
-path-prepend $GEM_HOME/bin
-
-
+...path-prepend $GEM_HOME/bin
 
 export PERL_CPANM_OPT='--sudo'
-
