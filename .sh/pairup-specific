@@ -4,10 +4,11 @@ export VISUAL=vim
 export EDITOR=$VISUAL
 set -o vi
 
-export GIT_AUTHOR_EMAIL=ingy@ingy.net
-export GIT_AUTHOR_NAME="Ingy döt Net"
-echo "Warning: set \$GIT_* vars to Ingy's addresses."
-echo "(override by doing: cp ~/.sh/{pairup-specific,zzz-mygit} then"
-echo " edit ~/.sh/zzz-mygit to taste)"
-export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
-export GIT_COMMITTER_AUTHOR=$GIT_AUTHOR_AUTHOR
+if [ -z "$GIT_AUTHOR_EMAIL" ]; then
+    echo "Warning: set \$GIT_* vars to Ingy's addresses. Override with:"
+    echo " cp ~/.sh/{pairup-specific,000-mygit} && vim \$_"
+    export GIT_AUTHOR_EMAIL=ingy@ingy.net
+    export GIT_AUTHOR_NAME="Ingy döt Net"
+    export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
+    export GIT_COMMITTER_AUTHOR=$GIT_AUTHOR_AUTHOR
+fi
